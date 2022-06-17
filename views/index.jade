@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1
+    a(href='/')= title
+  h2 Peliculas
+  -if(data.length)
+    table 
+      tr 
+        th Id 
+        th Titulo 
+        th Año
+        th Puntuacion
+        th Poster
+        th(colspan='2') Acciones
+          form.add(method='get' action='/agregar')
+            input.button.add(type='submit',value='Agregar')
+
+      -each movie in data   
+        tr 
+          td #{movie.movie_id}
+          td #{movie.title}
+          td #{movie.realease}
+          td #{movie.rating}
+          td #{movie.image}
+
+          td 
+            form.add(method='get' action='/editar/#{movie.movie_id}')
+              input.button.add(type='submit',value='Editar')
+          td 
+            form.add(method='POST', action='/eliminar/#{movie.movie_id}',enctype="application/x-www-form-urlencoded")
+              input(type="hidden", name="_method", value="DELETE")
+              input.button.add(type='button',value='Eliminar',onClick='eliminar(this)')
+    script.
+      function eliminar(input){
+        let deleteOk = confirm('Estas seguro de eliminar la Pelicula?')
+        return (deleteOk)?input.parentNode.submit():false
+      }
+
+  -else
+    p.error No hay datos para mostrar

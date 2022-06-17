@@ -1,0 +1,28 @@
+extends layout 
+
+block content 
+
+  section 
+      h1= title
+      h3  
+        a(href='/') Regresar al Home
+
+      form(action="/actualizar/:#{data.movie_id}", method="post",enctype="application/x-www-form-urlencoded") 
+        fieldset 
+          legend Agrega una Pelicula
+          div.form
+            lavel(for='movie_id') IMDB id: 
+            input#id(type="text", name="id",value='#{data.movie_id}',disabled,required)
+            input#movie_id(type='hidden', name='movie_id',value='#{data.movie_id}',required)
+
+            label(for='title') Titulo:
+            input#title(type='text',name='title',value='#{data.title}',required)
+            label(for='realease') Año: 
+            input#ralease_year(type='text',name='realease',value='#{data.realease}',required)
+            lable(for='rating') Calificacion: 
+            input#rating(type='text',name='rating',value='#{data.rating}',required)
+            label(for='image') Poster: 
+            input#image(type='text',name='image'  ,value='#{data.image}',required)
+           
+            input(type="hidden", name="_method", value="PUT")
+            input.btn-submit(type="submit", value="Editar")

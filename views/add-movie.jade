@@ -1,0 +1,25 @@
+extends layout 
+
+block content 
+
+  section 
+      h1= title
+      h3  
+        a(href='/') Regresar al Home
+
+      form(action="/", method="post") 
+        fieldset 
+          legend Agrega una Pelicula
+          div.form
+            lavel(for='movie_id') IMDB id: 
+            input#Movie_id(type="text", name="movie_id",required)
+            label(for='title') Titulo:
+            input#title(type='text',name='title',required)
+            label(for='realease') Año: 
+            input#ralease_year(type='text',name='realease',required)
+            lable(for='rating') Calificacion: 
+            input#rating(type='text',name='rating',required)
+            label(for='image') Poster: 
+            input#image(type='text',name='image'  ,required)
+           
+            input.btn-submit(type="submit", value="Agregar")
